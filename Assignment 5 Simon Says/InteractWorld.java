@@ -32,23 +32,6 @@ class InteractWorld extends World {
   int winNum;
   Random rand; 
   
-  // Main constructor: Set the color locations to a predetermined location, but
-  // let the game
-  // (usually a MovieWorld) pass in the color sequence that the user needs to
-  // match
-  InteractWorld(ILoColor selectedColor, ILoColor matchColors, ILoColor allColors, int winNum) {
-    this.selectedColor = selectedColor;
-    this.matchColors = matchColors;
-    this.allColors = allColors;
-    this.redPosn = new Posn(200, 200);
-    this.cyanPosn = new Posn(300, 200);
-    this.bluePosn = new Posn(200, 300);
-    this.greenPosn = new Posn(300, 300);
-    this.circleSize = 30;
-    this.winNum = winNum;
-    this.rand = new Random();
-  }
-  
   // For testing: accept a random seed
   InteractWorld(ILoColor selectedColor, ILoColor matchColors, ILoColor allColors, int winNum, Random rand) {
     this.selectedColor = selectedColor;
@@ -61,6 +44,14 @@ class InteractWorld extends World {
     this.circleSize = 30;
     this.winNum = winNum;
     this.rand = rand;  
+  }
+  
+  // Main constructor: Set the color locations to a predetermined location, but
+  // let the game
+  // (usually a MovieWorld) pass in the color sequence that the user needs to
+  // match
+  InteractWorld(ILoColor selectedColor, ILoColor matchColors, ILoColor allColors, int winNum) {
+    this(selectedColor, matchColors, allColors, winNum, new Random()); 
   }
   
 
@@ -188,7 +179,7 @@ class InteractWorld extends World {
     // then they
     // must have clicked on the wrong circle
     else {
-      return this.endOfWorld("You lost!" + " Score: " + this.allColors.countColors());
+      return this.endOfWorld("You lost!" + " Score: " + (this.allColors.countColors() - 1));
     }
   }
 
