@@ -47,9 +47,36 @@ class MovieWorld extends World {
     this.tick = tick;
   }
   
-  
-  // The following three methods
+  /*
+   * Fields:
+   * ...this.colors...      -- ILoColor
+   * ...this.allColors...   -- ILoColor
+   * ...this.colorCount...  -- int
+   * ...this.tick...        -- int
+   * 
+   * Methods:
+   * ...this.makeScene()... -- WorldScene
+   * ...this.tick()...      -- World
+   * 
+   * Methods on Fields:
+   * ...this.colors.sameSequence(ILoColor)... -- boolean
+   * ...this.colors.startsWith(ILoColor)... -- boolean
+   * ...this.colors.startsWithSpecific(ConsLoColor)... -- boolean
+   * ...this.colors.startswithSpecific(MtLoColor)... -- boolean 
+   * ...this.colors.removeOne()... -- ILoColor 
+   * ...this.colors.countColors()... -- int 
+   * ...this.colors.append(Color)... -- ILoColor
+   * ...this.allColors.sameSequence(ILoColor)... -- boolean
+   * ...this.allColors.startsWith(ILoColor)... -- boolean
+   * ...this.allColors.startsWithSpecific(ConsLoColor)... -- boolean
+   * ...this.allColors.startswithSpecific(MtLoColor)... -- boolean 
+   * ...this.allColors.removeOne()... -- ILoColor 
+   * ...this.allColors.countColors()... -- int 
+   * ...this.allColors.append(Color)... -- ILoColor
+   */
 
+
+  // Template: same as class
   // Creates a WorldScene from this scene
   public WorldScene makeScene() {
     WorldScene s = this.getEmptyScene();
@@ -97,6 +124,7 @@ class MovieWorld extends World {
     }
   }
 
+  // Template: same as class
   // Respond to a tick by producing a new world from this world
   public World onTick() {
     // Only do things on every other tick. This makes the color sequence more
