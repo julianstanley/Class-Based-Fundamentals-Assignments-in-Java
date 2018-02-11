@@ -188,7 +188,7 @@ class InteractWorld extends World {
     // then they
     // must have clicked on the wrong circle
     else {
-      return this.endOfWorld("You lost!");
+      return this.endOfWorld("You lost!" + " Score: " + this.allColors.countColors());
     }
   }
 

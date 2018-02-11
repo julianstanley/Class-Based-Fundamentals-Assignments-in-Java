@@ -22,6 +22,7 @@ class MovieWorld extends World {
   ILoColor allColors;
   int colorCount;
   int tick;
+  int winThresh; 
 
   // Main constructor: pass in the initial colors and the amount of colors to be
   // shown,
@@ -55,6 +56,9 @@ class MovieWorld extends World {
     this.colorCount = colorCount;
     this.tick = tick;
   }
+  
+  
+  // The following three methods
 
   // Creates a WorldScene from this scene
   public WorldScene makeScene() {
@@ -105,14 +109,9 @@ class MovieWorld extends World {
 
   // Respond to a tick by producing a new world from this world
   public World onTick() {
-    // If your color list is long enough, then you win!
-    if (this.colorCount > 5) {
-      return this.endOfWorld("You've won!");
-    }
-
     // Only do things on every other tick. This makes the color sequence more
     // clear if two of the same color are being shown in sequence
-    else if (tick % 2 == 0) {
+    if (tick % 2 == 0) {
       return new MovieWorld(this.colors, this.allColors, this.colorCount, this.tick + 1);
     }
 
@@ -129,9 +128,6 @@ class MovieWorld extends World {
           this.allColors.countColors());
     }
   }
-
-  // End this world by sending the user to a WonWorld
-  public World endOfWorld(String str) {
-    return new WonWorld(str);
-  }
 }
+
+

@@ -51,5 +51,4 @@ class ExamplesWorlds {
 
   // End World
   World lostWorld = new LostWorld("You Lost");
-  World wonWorld = new WonWorld("You Won");
 }

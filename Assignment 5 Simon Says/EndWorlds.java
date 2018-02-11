@@ -21,16 +21,6 @@ abstract class EndWorld extends World {
   }
 }
 
-// To represent a world in which the user has won!
-class WonWorld extends EndWorld {
-  String msg;
-
-  WonWorld(String msg) {
-    super(msg);
-  }
-
-}
-
 // To represent a world in which the user has lost ):
 class LostWorld extends EndWorld {
   String msg;
