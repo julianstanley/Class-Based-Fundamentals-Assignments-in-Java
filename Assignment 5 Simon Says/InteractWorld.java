@@ -30,7 +30,8 @@ class InteractWorld extends World {
   Posn greenPosn;
   int circleSize;
   int winNum;
-
+  Random rand; 
+  
   // Main constructor: Set the color locations to a predetermined location, but
   // let the game
   // (usually a MovieWorld) pass in the color sequence that the user needs to
@@ -45,8 +46,23 @@ class InteractWorld extends World {
     this.greenPosn = new Posn(300, 300);
     this.circleSize = 30;
     this.winNum = winNum;
-
+    this.rand = new Random();
   }
+  
+  // For testing: accept a random seed
+  InteractWorld(ILoColor selectedColor, ILoColor matchColors, ILoColor allColors, int winNum, Random rand) {
+    this.selectedColor = selectedColor;
+    this.matchColors = matchColors;
+    this.allColors = allColors;
+    this.redPosn = new Posn(200, 200);
+    this.cyanPosn = new Posn(300, 200);
+    this.bluePosn = new Posn(200, 300);
+    this.greenPosn = new Posn(300, 300);
+    this.circleSize = 30;
+    this.winNum = winNum;
+    this.rand = rand;  
+  }
+  
 
   // Create a WorldScene from this World
   public WorldScene makeScene() {
@@ -98,13 +114,12 @@ class InteractWorld extends World {
 
   // Respond to a tick by producing a new world from this world
   public World onTick() {
-    Random r = new Random();
 
     // If the user doesn't need to press any more colors, pick a random color to
     // add to the queue
     // and pass that queue off to be displayed to the user
     if (this.winNum < 1) {
-      int pickNum = r.nextInt(4);
+      int pickNum = this.rand.nextInt(4);
       if (pickNum == 0) {
         return new MovieWorld(this.allColors.append(Color.RED), 1 + this.allColors.countColors());
       }

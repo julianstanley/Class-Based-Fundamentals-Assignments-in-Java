@@ -17,6 +17,7 @@ class IntroWorld extends World {
   int buttonSize;
   int textSize;
   Color startColor;
+  int rand; 
 
   // Set the button X's to some predetermined spot. But let the Y values be up
   // to the
@@ -33,6 +34,36 @@ class IntroWorld extends World {
 
     // Pick a random color. We'll use this later to start the game
     Random r = new Random();
+    int pickNum = r.nextInt(4);
+    if (pickNum == 0) {
+      this.startColor = Color.RED;
+    }
+    else if (pickNum == 1) {
+      this.startColor = Color.CYAN;
+    }
+    else if (pickNum == 2) {
+      this.startColor = Color.BLUE;
+    }
+
+    else {
+      this.startColor = Color.GREEN;
+    }
+  }
+  
+  // Separate constructor used to test random
+  IntroWorld(int easyY, int medY, int hardY, int buttonSize, int rand) {
+    this.easyX = 250;
+    this.easyY = easyY;
+    this.medX = 250;
+    this.medY = medY;
+    this.hardX = 250;
+    this.hardY = hardY;
+    this.buttonSize = buttonSize;
+    this.textSize = buttonSize / 4;
+    this.rand = rand; 
+
+    // Pick a random color. We'll use this later to start the game
+    Random r = new Random(rand);
     int pickNum = r.nextInt(4);
     if (pickNum == 0) {
       this.startColor = Color.RED;
