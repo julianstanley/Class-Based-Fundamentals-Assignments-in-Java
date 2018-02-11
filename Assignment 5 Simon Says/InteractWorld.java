@@ -20,6 +20,8 @@ import java.util.Random;
  */
 
 // To represent a world where the user can interact with the colored circles
+// The Posn values are never constructed, but they are useful for code-readability in the
+// mouse pressed method
 class InteractWorld extends World {
   ILoColor selectedColor;
   ILoColor matchColors;
@@ -30,18 +32,19 @@ class InteractWorld extends World {
   Posn greenPosn;
   int circleSize;
   int winNum;
-  Random rand; 
-  
+  Random rand;
+
   // Main constructor: Set the color locations to a predetermined location, but
   // let the game
   // (usually a MovieWorld) pass in the color sequence that the user needs to
   // match
   InteractWorld(ILoColor selectedColor, ILoColor matchColors, ILoColor allColors, int winNum) {
-    this(selectedColor, matchColors, allColors, winNum, new Random()); 
+    this(selectedColor, matchColors, allColors, winNum, new Random());
   }
-  
+
   // For testing: accept a random seed
-  InteractWorld(ILoColor selectedColor, ILoColor matchColors, ILoColor allColors, int winNum, Random rand) {
+  InteractWorld(ILoColor selectedColor, ILoColor matchColors, ILoColor allColors, int winNum,
+      Random rand) {
     this.selectedColor = selectedColor;
     this.matchColors = matchColors;
     this.allColors = allColors;
@@ -51,9 +54,9 @@ class InteractWorld extends World {
     this.greenPosn = new Posn(300, 300);
     this.circleSize = 30;
     this.winNum = winNum;
-    this.rand = rand;  
+    this.rand = rand;
   }
- 
+
   // Create a WorldScene from this World
   public WorldScene makeScene() {
     WorldScene s = this.getEmptyScene();
