@@ -20,7 +20,7 @@ import java.util.Random;
  */
 
 // To represent a world where the user can interact with the colored circles
-// The Posn values are never constructed, but they are useful for code-readability in the
+// *Note: The 'Posn' values are never constructed, but they are useful for code-readability in the
 // mouse pressed method
 class InteractWorld extends World {
   ILoColor selectedColor;
@@ -56,7 +56,53 @@ class InteractWorld extends World {
     this.winNum = winNum;
     this.rand = rand;
   }
+  
+  /*
+   * Fields:
+   * ...this.selectedColor...    -- ILoColor
+   * ...this.matchColors...      -- ILoColor
+   * ...this.allColors...        -- ILoColor
+   * ...this.redPosn...          -- Posn
+   * ...this.cyanPosn...         -- Posn
+   * ...this.bluePosn...         -- Posn
+   * ...this.greenPosn...        -- Posn
+   * ...this.circleSize...       -- int
+   * ...this.winNum...           -- int
+   * ...this.rand...             -- Random
+   * 
+   * Methods:
+   * ...this.makeScene()...           -- WorldScene
+   * ...this.onTick()...              -- World
+   * ...this.onMousePressed(Posn)...  -- World
+   * ...this.onMouseReleased(Posn)... -- World
+   * ...this.endOfWorld(String)...    -- World
+   * 
+   * Methods on Fields:
+   * ...this.selectedColor.sameSequence(ILoColor)... -- boolean
+   * ...this.selectedColor.startsWith(ILoColor)... -- boolean
+   * ...this.selectedColor.startsWithSpecific(ConsLoColor)... -- boolean
+   * ...this.selectedColor.startswithSpecific(MtLoColor)... -- boolean 
+   * ...this.selectedColor.removeOne()... -- ILoColor 
+   * ...this.selectedColor.countColors()... -- int 
+   * ...this.selectedColor.append(Color)... -- ILoColor
+   * ...this.matchColors.sameSequence(ILoColor)... -- boolean
+   * ...this.matchColors.startsWith(ILoColor)... -- boolean
+   * ...this.matchColors.startsWithSpecific(ConsLoColor)... -- boolean
+   * ...this.matchColors.startswithSpecific(MtLoColor)... -- boolean 
+   * ...this.matchColors.removeOne()... -- ILoColor 
+   * ...this.matchColors.countColors()... -- int 
+   * ...this.matchColors.append(Color)... -- ILoColor
+   * ...this.allColors.sameSequence(ILoColor)... -- boolean
+   * ...this.allColors.startsWith(ILoColor)... -- boolean
+   * ...this.allColors.startsWithSpecific(ConsLoColor)... -- boolean
+   * ...this.allColors.startswithSpecific(MtLoColor)... -- boolean 
+   * ...this.allColors.removeOne()... -- ILoColor 
+   * ...this.allColors.countColors()... -- int 
+   * ...this.allColors.append(Color)... -- ILoColor
+   * 
+   */
 
+  // Template: same as class
   // Create a WorldScene from this World
   public WorldScene makeScene() {
     WorldScene s = this.getEmptyScene();
@@ -105,6 +151,7 @@ class InteractWorld extends World {
     }
   }
 
+  // Template: same as class
   // Respond to a tick by producing a new world from this world
   public World onTick() {
 
@@ -136,6 +183,12 @@ class InteractWorld extends World {
     }
   }
 
+  // Template: same as class + 
+  /* Parameters:
+   * ...pos...   -- Posn
+   * 
+   * Methods on parameters:
+   */
   // Create a new world in response to a mouse click
   public World onMousePressed(Posn pos) {
     Utils u = new Utils();
@@ -185,11 +238,23 @@ class InteractWorld extends World {
     }
   }
 
+  // Template: same as class + 
+  /* Parameters:
+   * ...pos...   -- Posn
+   * 
+   * Methods on parameters:
+   */
   // Create a new world in response to the mouse being released
   public World onMouseReleased(Posn pos) {
     return new InteractWorld(new MtLoColor(), this.matchColors, this.allColors, this.winNum);
   }
 
+  // Template: same as class + 
+  /* Parameters:
+   * ...msg...   -- String
+   * 
+   * Methods on parameters:
+   */
   // End this world by sending the user to a LostWorld
   public World endOfWorld(String msg) {
     return new LostWorld(msg);

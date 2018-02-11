@@ -20,7 +20,7 @@ class MovieWorld extends World {
   ILoColor colors;
   ILoColor allColors;
   int colorCount;
-  int tick; 
+  int tick;
 
   // Main constructor: pass in the initial colors and the amount of colors to be
   // shown,
@@ -147,5 +147,3 @@ class MovieWorld extends World {
     }
   }
 }
-
-
