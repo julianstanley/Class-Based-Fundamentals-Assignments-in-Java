@@ -8,12 +8,8 @@ import javalib.worldimages.*;
 
 // To represent the first world that the user should see
 class IntroWorld extends World {
-  int easyX;
-  int easyY;
-  int medX;
-  int medY;
-  int hardX;
-  int hardY;
+  int buttonX;
+  int buttonY;
   int buttonSize;
   int textSize;
   Color startColor;
@@ -22,13 +18,9 @@ class IntroWorld extends World {
   // Set the button X's to some predetermined spot. But let the Y values be up
   // to the
   // game-initialization call
-  IntroWorld(int easyY, int medY, int hardY, int buttonSize) {
-    this.easyX = 250;
-    this.easyY = easyY;
-    this.medX = 250;
-    this.medY = medY;
-    this.hardX = 250;
-    this.hardY = hardY;
+  IntroWorld(int buttonY, int buttonSize) {
+    this.buttonX = 250;
+    this.buttonY = buttonY;
     this.buttonSize = buttonSize;
     this.textSize = buttonSize / 4;
 
@@ -51,13 +43,9 @@ class IntroWorld extends World {
   }
   
   // Separate constructor used to test random
-  IntroWorld(int easyY, int medY, int hardY, int buttonSize, int rand) {
-    this.easyX = 250;
-    this.easyY = easyY;
-    this.medX = 250;
-    this.medY = medY;
-    this.hardX = 250;
-    this.hardY = hardY;
+  IntroWorld(int buttonY, int buttonSize, int rand) {
+    this.buttonX = 250;
+    this.buttonY = buttonY;
     this.buttonSize = buttonSize;
     this.textSize = buttonSize / 4;
     this.rand = rand; 
@@ -85,37 +73,19 @@ class IntroWorld extends World {
     WorldScene s = this.getEmptyScene();
 
     return s
-        .placeImageXY(new OverlayImage(new TextImage("Easy", this.textSize, Color.WHITE),
+        .placeImageXY(new OverlayImage(new TextImage("Start", this.textSize, Color.WHITE),
             new RectangleImage(this.buttonSize, this.buttonSize, OutlineMode.SOLID, Color.BLACK)),
-            easyX, easyY)
-        .placeImageXY(new OverlayImage(new TextImage("Medium", textSize, Color.WHITE),
-            new RectangleImage(this.buttonSize, this.buttonSize, OutlineMode.SOLID, Color.BLACK)),
-            medX, medY)
-        .placeImageXY(new OverlayImage(new TextImage("Hard", this.textSize, Color.WHITE),
-            new RectangleImage(this.buttonSize, this.buttonSize, OutlineMode.SOLID, Color.BLACK)),
-            hardX, hardY);
+            buttonX, buttonY);
   }
 
   // Create a new World in response to a mouse click
   public World onMousePressed(Posn pos) {
     Utils u = new Utils();
 
-    // Easy button pressed
-    if (u.posnWithin(pos, this.easyX, this.easyY, this.buttonSize / 2, this.buttonSize / 2)) {
+    // Button pressed
+    if (u.posnWithin(pos, this.buttonX, this.buttonY, this.buttonSize / 2, this.buttonSize / 2)) {
       return new InteractWorld(new MtLoColor(), new MtLoColor(), new MtLoColor(), 0);
     }
-
-    // Medium button pressed
-    else if (u.posnWithin(pos, this.medX, this.medY, this.buttonSize / 2, this.buttonSize / 2)) {
-      return new InteractWorld(new MtLoColor(), new MtLoColor(), new MtLoColor(), 0);
-    }
-
-    // Hard button pressed
-    else if (u.posnWithin(pos, this.hardX, this.hardY, this.buttonSize / 2, this.buttonSize / 2)) {
-
-      return new InteractWorld(new MtLoColor(), new MtLoColor(), new MtLoColor(), 0);
-    }
-
     else {
       return this;
     }

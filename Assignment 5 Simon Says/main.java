@@ -14,9 +14,8 @@ import tester.*;
 class ExamplesGame {
 
   // Initial world: change these parameters to change the button sizes
-  // IntroWorld arguments: new IntroWorld('Easy' button Y value, 'Medium' button
-  // Y Value, 'Hard' button Y value, button size)
-  World inital = new IntroWorld(100, 250, 400, 100);
+  // IntroWorld arguments: new IntroWorld('Button Y value, button size, (optional) random seed)
+  World inital = new IntroWorld(250, 150);
 
   // Initialize the game. bigBang takes in WorldScene X and Y values and a tick
   // rate
