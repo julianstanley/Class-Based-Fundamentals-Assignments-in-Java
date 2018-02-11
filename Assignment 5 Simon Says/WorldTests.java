@@ -59,13 +59,13 @@ class ExamplesWorlds {
   World interact4 = new InteractWorld(new ConsLoColor(Color.GREEN, new MtLoColor()), new MtLoColor(), new MtLoColor(), 0);
   
   // MovieWorld examples
-  World mw0 = new MovieWorld(new MtLoColor(), 0);
-  World mw1 = new MovieWorld(new ConsLoColor(Color.RED, new MtLoColor()), 1);
-  World mw2 = new MovieWorld(new ConsLoColor(Color.CYAN, new ConsLoColor(Color.RED, new MtLoColor())), 1);
-  World mw3 = new MovieWorld(new ConsLoColor(Color.BLUE, new MtLoColor()), 1);
-  World mw4 = new MovieWorld(new ConsLoColor(Color.GREEN, new MtLoColor()), 1);
+  World mw0 = new MovieWorld(new ConsLoColor(Color.RED, new MtLoColor()), 1);
+  World mw1 = new MovieWorld(new ConsLoColor(Color.CYAN, new ConsLoColor(Color.RED, new MtLoColor())), 2);
+  World mw2 = new MovieWorld(new ConsLoColor(Color.BLUE, new MtLoColor()), 1);
+  World mw3 = new MovieWorld(new ConsLoColor(Color.GREEN, new MtLoColor()), 1);
+  World mw4 = new MovieWorld(new ConsLoColor(Color.RED, new MtLoColor()), new ConsLoColor(Color.RED, new MtLoColor()), 1, 1);
   
-  
+  // Tests makeScene() for each World type
   boolean testMakeScene(Tester t) {
     Utils u = new Utils();
     return 
@@ -119,7 +119,41 @@ class ExamplesWorlds {
             .placeImageXY(new CircleImage(30, OutlineMode.SOLID, u.transparent(Color.GREEN)), 300, 300))
         
         // Testing MovieWorld.makeScene()
-        &&
+        && t.checkExpect(mw0.makeScene(),
+            new WorldScene(500, 500)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, u.transparent(Color.RED)), 200,
+                    200)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.CYAN), 300, 200)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.BLUE), 200, 300)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.GREEN), 300, 300))
+        
+        && t.checkExpect(mw1.makeScene(), new WorldScene(500, 500)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.RED), 200, 200)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, u.transparent(Color.CYAN)), 300,
+                200)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.BLUE), 200, 300)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.GREEN), 300, 300))
+        
+        && t.checkExpect(mw2.makeScene(), new WorldScene(500, 500)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.RED), 200, 200)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.CYAN), 300,
+                200)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, u.transparent(Color.BLUE)), 200, 300)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.GREEN), 300, 300))
+        
+        && t.checkExpect(mw3.makeScene(), new WorldScene(500, 500)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.RED), 200, 200)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.CYAN), 300,
+                200)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.BLUE), 200, 300)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, u.transparent(Color.GREEN)), 300, 300))
+        
+        && t.checkExpect(mw4.makeScene(),
+            new WorldScene(500, 500)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.RED), 200, 200)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.CYAN), 300, 200)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.BLUE), 200, 300)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.GREEN), 300, 300));
     }
 
   // Interactive
