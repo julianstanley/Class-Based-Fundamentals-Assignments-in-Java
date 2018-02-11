@@ -7,31 +7,16 @@ import javalib.worldimages.*;
 
 // To represent the first world that the user should see
 class IntroWorld extends World {
-  int buttonX;
-  int buttonY;
-  int buttonSize;
-  int textSize;
-  Color startColor;
-  int rand;
 
-  // Set the button X's to some predetermined spot. But let the Y values be up
-  // to the
-  // game-initialization call
-  IntroWorld(int buttonY, int buttonSize) {
-    this.buttonX = 250;
-    this.buttonY = buttonY;
-    this.buttonSize = buttonSize;
-    this.textSize = buttonSize / 4;
-  }
 
   // Make a WorldScene based on this World
   public WorldScene makeScene() {
     WorldScene s = this.getEmptyScene();
 
     return s.placeImageXY(
-        new OverlayImage(new TextImage("Start", this.textSize, Color.WHITE),
-            new RectangleImage(this.buttonSize, this.buttonSize, OutlineMode.SOLID, Color.BLACK)),
-        buttonX, buttonY);
+        new OverlayImage(new TextImage("Start", 50, Color.WHITE),
+            new RectangleImage(250, 150, OutlineMode.SOLID, Color.BLACK)),
+        250, 250);
   }
 
   // Create a new World in response to a mouse click
@@ -39,7 +24,7 @@ class IntroWorld extends World {
     Utils u = new Utils();
 
     // Button pressed
-    if (u.posnWithin(pos, this.buttonX, this.buttonY, this.buttonSize / 2, this.buttonSize / 2)) {
+    if (u.posnWithin(pos, 250, 250, 75, 75)) {
       return new InteractWorld(new MtLoColor(), new MtLoColor(), new MtLoColor(), 0);
     }
     else {
