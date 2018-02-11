@@ -8,7 +8,16 @@ import javalib.worldimages.*;
 // To represent the first world that the user should see
 class IntroWorld extends World {
 
+  /* Fields:
+   * 
+   * Methods:
+   * ...this.makeScene()...          -- WorldScene
+   * ...this.onMousePressed(Posn)... -- World
+   * 
+   * Methods on fields:
+   */
 
+  // Template: same as class
   // Make a WorldScene based on this World
   public WorldScene makeScene() {
     WorldScene s = this.getEmptyScene();
@@ -19,6 +28,13 @@ class IntroWorld extends World {
         250, 250);
   }
 
+  // Template: same as class +
+  /* Parameters:
+   * ...pos...  -- Posn
+   * 
+   * Methods on Parameters:
+   * 
+   */
   // Create a new World in response to a mouse click
   public World onMousePressed(Posn pos) {
     Utils u = new Utils();

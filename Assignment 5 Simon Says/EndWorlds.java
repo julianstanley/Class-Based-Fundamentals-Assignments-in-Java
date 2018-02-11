@@ -13,7 +13,19 @@ abstract class EndWorld extends World {
   EndWorld(String msg) {
     this.msg = msg;
   }
+  
+  /*
+   * Fields:
+   * ...msg...  -- String
+   * 
+   * Methods:
+   * ...this.makeScene()... -- WorldScene
+   * 
+   * Methods on Fields:
+   * 
+   */
 
+  // Template: same as class
   // Create a WorldScene based on this world
   public WorldScene makeScene() {
     WorldScene s = this.getEmptyScene();
@@ -29,4 +41,15 @@ class LostWorld extends EndWorld {
   LostWorld(String msg) {
     super(msg);
   }
+  
+  /*
+   * Fields:
+   * ...msg...  -- String
+   * 
+   * Methods:
+   * ...this.makeScene()... -- WorldScene
+   * 
+   * Methods on Fields:
+   * 
+   */
 }
