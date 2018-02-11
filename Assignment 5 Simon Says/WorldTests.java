@@ -1,9 +1,13 @@
-
 // This file contains tests for the Worlds
 
 import java.awt.Color;
 
-import javalib.funworld.World;
+import javalib.funworld.*;
+import javalib.worldimages.CircleImage;
+import javalib.worldimages.OutlineMode;
+import javalib.worldimages.OverlayImage;
+import javalib.worldimages.RectangleImage;
+import javalib.worldimages.TextImage;
 import tester.Tester;
 
 // To store examples and tests for the ColorList file
@@ -40,11 +44,83 @@ class ExamplesColors {
 
 // Movie worlds
 class ExamplesWorlds {
-
-  World w = new MovieWorld(new MtLoColor(), new MtLoColor(), 0, 5);
-  World wR = new MovieWorld(new ConsLoColor(Color.RED, new MtLoColor()), new MtLoColor(), 1, 5);
-  World wRainbow = new MovieWorld(new ConsLoColor(Color.RED, new ConsLoColor(Color.BLUE,
-      new ConsLoColor(Color.GREEN, new ConsLoColor(Color.CYAN, new MtLoColor())))), 4);
+  
+  // InteractWorld example
+  World iw0 = new IntroWorld();
+  
+  // EndWorld example
+  World ew0 = new LostWorld("You lost! Score: 0");
+  
+  // InteractWorld examples
+  World interact0 = new InteractWorld(new MtLoColor(), new MtLoColor(), new MtLoColor(), 0);
+  World interact1 = new InteractWorld(new ConsLoColor(Color.RED, new MtLoColor()), new MtLoColor(), new MtLoColor(), 0);
+  World interact2 = new InteractWorld(new ConsLoColor(Color.CYAN, new MtLoColor()), new MtLoColor(), new MtLoColor(), 0);
+  World interact3 = new InteractWorld(new ConsLoColor(Color.BLUE, new MtLoColor()), new MtLoColor(), new MtLoColor(), 0);
+  World interact4 = new InteractWorld(new ConsLoColor(Color.GREEN, new MtLoColor()), new MtLoColor(), new MtLoColor(), 0);
+  
+  // MovieWorld examples
+  World mw0 = new MovieWorld(new MtLoColor(), 0);
+  World mw1 = new MovieWorld(new ConsLoColor(Color.RED, new MtLoColor()), 1);
+  World mw2 = new MovieWorld(new ConsLoColor(Color.CYAN, new ConsLoColor(Color.RED, new MtLoColor())), 1);
+  World mw3 = new MovieWorld(new ConsLoColor(Color.BLUE, new MtLoColor()), 1);
+  World mw4 = new MovieWorld(new ConsLoColor(Color.GREEN, new MtLoColor()), 1);
+  
+  
+  boolean testMakeScene(Tester t) {
+    Utils u = new Utils();
+    return 
+        // Testing IntroWorld.makeScene()
+        t.checkExpect(iw0.makeScene(), new WorldScene(500, 500).placeImageXY(
+        new OverlayImage(new TextImage("Start", 50, Color.WHITE),
+            new RectangleImage(250, 150, OutlineMode.SOLID, Color.BLACK)),
+        250, 250))
+        
+        // Testing EndWorld.makeScene()
+        && t.checkExpect(ew0.makeScene(),
+            new WorldScene(500,
+                500).placeImageXY(new TextImage("You lost! Score: 0", 50, Color.GRAY), 250,
+                    250))
+        
+        // Testing InteractWorld.makeScene()
+        && t.checkExpect(interact0.makeScene(),
+            new WorldScene(500, 500)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.RED), 200, 200)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.CYAN), 300, 200)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.BLUE), 200, 300)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.GREEN), 300, 300))
+        
+        && t.checkExpect(interact1.makeScene(),
+            new WorldScene(500, 500)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, u.transparent(Color.RED)), 200,
+                    200)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.CYAN), 300, 200)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.BLUE), 200, 300)
+                .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.GREEN), 300, 300))
+        
+        && t.checkExpect(interact2.makeScene(), new WorldScene(500, 500)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.RED), 200, 200)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, u.transparent(Color.CYAN)), 300,
+                200)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.BLUE), 200, 300)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.GREEN), 300, 300))
+        
+        && t.checkExpect(interact3.makeScene(), new WorldScene(500, 500)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.RED), 200, 200)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.CYAN), 300,
+                200)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, u.transparent(Color.BLUE)), 200, 300)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.GREEN), 300, 300))
+        
+        && t.checkExpect(interact4.makeScene(), new WorldScene(500, 500)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.RED), 200, 200)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.CYAN), 300,
+                200)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.BLUE), 200, 300)
+            .placeImageXY(new CircleImage(30, OutlineMode.SOLID, u.transparent(Color.GREEN)), 300, 300))
+        
+        // Testing MovieWorld.makeScene()
+        &&
+    }
 
   // Interactive
   World interact = new InteractWorld(new MtLoColor(), new MtLoColor(), new MtLoColor(), 0);
