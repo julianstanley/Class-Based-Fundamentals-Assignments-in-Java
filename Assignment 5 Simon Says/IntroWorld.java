@@ -20,7 +20,7 @@ class IntroWorld extends World {
   // Template: same as class
   // Make a WorldScene based on this World
   public WorldScene makeScene() {
-    WorldScene s = this.getEmptyScene();
+    WorldScene s = new WorldScene(500, 500);
 
     return s.placeImageXY(
         new OverlayImage(new TextImage("Start", 50, Color.WHITE),

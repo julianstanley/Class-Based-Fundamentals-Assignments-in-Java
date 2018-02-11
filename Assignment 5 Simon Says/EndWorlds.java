@@ -28,7 +28,7 @@ abstract class EndWorld extends World {
   // Template: same as class
   // Create a WorldScene based on this world
   public WorldScene makeScene() {
-    WorldScene s = this.getEmptyScene();
+    WorldScene s = new WorldScene(500, 500); 
     return s.placeImageXY(new TextImage(this.msg, 50, Color.GRAY),
         250, 250);
   }

@@ -105,7 +105,7 @@ class InteractWorld extends World {
   // Template: same as class
   // Create a WorldScene from this World
   public WorldScene makeScene() {
-    WorldScene s = this.getEmptyScene();
+    WorldScene s = new WorldScene(500, 500); 
     Utils u = new Utils();
 
     // Red circle is selected

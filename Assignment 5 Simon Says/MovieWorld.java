@@ -79,7 +79,7 @@ class MovieWorld extends World {
   // Template: same as class
   // Creates a WorldScene from this scene
   public WorldScene makeScene() {
-    WorldScene s = this.getEmptyScene();
+    WorldScene s = new WorldScene(500, 500); 
     Utils u = new Utils();
 
     if (tick % 2 == 1) {
