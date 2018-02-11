@@ -32,6 +32,14 @@ class InteractWorld extends World {
   int winNum;
   Random rand; 
   
+  // Main constructor: Set the color locations to a predetermined location, but
+  // let the game
+  // (usually a MovieWorld) pass in the color sequence that the user needs to
+  // match
+  InteractWorld(ILoColor selectedColor, ILoColor matchColors, ILoColor allColors, int winNum) {
+    this(selectedColor, matchColors, allColors, winNum, new Random()); 
+  }
+  
   // For testing: accept a random seed
   InteractWorld(ILoColor selectedColor, ILoColor matchColors, ILoColor allColors, int winNum, Random rand) {
     this.selectedColor = selectedColor;
@@ -45,16 +53,7 @@ class InteractWorld extends World {
     this.winNum = winNum;
     this.rand = rand;  
   }
-  
-  // Main constructor: Set the color locations to a predetermined location, but
-  // let the game
-  // (usually a MovieWorld) pass in the color sequence that the user needs to
-  // match
-  InteractWorld(ILoColor selectedColor, ILoColor matchColors, ILoColor allColors, int winNum) {
-    this(selectedColor, matchColors, allColors, winNum, new Random()); 
-  }
-  
-
+ 
   // Create a WorldScene from this World
   public WorldScene makeScene() {
     WorldScene s = this.getEmptyScene();

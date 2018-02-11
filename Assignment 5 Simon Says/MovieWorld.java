@@ -8,12 +8,11 @@ import javalib.worldimages.CircleImage;
 import javalib.worldimages.OutlineMode;
 
 /*
- * A MovieWorld does one of three things:
+ * A MovieWorld does one of two things:
  * 1. If there is a color sequence to display: display the user that color sequence
  * 
  * 2. If there are no colors to display: pass the user along to an interactive world
  * 
- * 3. If the color sequence is long enough, the user has won, so send them to a winning endWorld
  */
 
 // To represent a world where the user is shown a sequence of colors
@@ -28,11 +27,7 @@ class MovieWorld extends World {
   // shown,
   // Initialize tick to 0
   MovieWorld(ILoColor colors, ILoColor allColors, int colorCount) {
-    this.colors = colors;
-    this.allColors = allColors;
-    this.colorCount = colorCount;
-    this.tick = 0;
-
+    this(colors, allColors, colorCount, 0);
   }
 
   // Convenience constructor: if colors and allColors are the (colors get
@@ -40,11 +35,7 @@ class MovieWorld extends World {
   // allColors stays intact so we can send the full list of colors to the
   // InteractWorld
   MovieWorld(ILoColor colors, int colorCount) {
-    this.colors = colors;
-    this.allColors = colors;
-    this.colorCount = colorCount;
-    this.tick = 0;
-
+    this(colors, colors, colorCount, 0);
   }
 
   // Convenience constructor: like the main constructor, but takes in a tick so

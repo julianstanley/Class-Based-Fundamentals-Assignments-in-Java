@@ -5,7 +5,6 @@ import tester.*;
  * To do list:
  * - Write some damn tests
  * - Implement the random color checking as in instructions
- * - Actually implement easy, medium, and hard levels
  * 
  * 
  */
