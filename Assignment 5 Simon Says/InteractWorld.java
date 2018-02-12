@@ -7,6 +7,8 @@ import javalib.funworld.WorldScene;
 import javalib.worldimages.CircleImage;
 import javalib.worldimages.OutlineMode;
 import javalib.worldimages.Posn;
+import javalib.worldimages.TextImage;
+
 import java.util.Random;
 
 /*
@@ -255,8 +257,10 @@ class InteractWorld extends World {
    * 
    * Methods on parameters:
    */
-  // End this world by sending the user to a LostWorld
-  public World endOfWorld(String msg) {
-    return new LostWorld(msg);
+  // Draw the last scene in this world
+  public WorldScene lastScene(String msg) {
+    WorldScene s = new WorldScene(500, 500); 
+    return s.placeImageXY(new TextImage(msg, 50, Color.GRAY),
+        250, 250);
   }
 }
