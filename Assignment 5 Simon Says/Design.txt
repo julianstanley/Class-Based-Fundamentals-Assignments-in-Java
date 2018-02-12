@@ -1,0 +1,82 @@
+This design description will explain the classes in the sequence that the user would encounter 
+those classes.
+
+
+----- User begins game, and an [IntroWorld] is created------
+
+An [IntroWorld] has no fields, and it's purpose is very simple: to display a "Start" button, and to 
+send the user to an [InteractWorld] when they click the start button. The [IntroWorld] asks the
+[Utils] class for help in knowing whether the user clicked inside or outside of the start button 
+(elaboration on Utils below).
+
+
+----- User presses start button, and an [InteractWorld] is created------
+
+But, if the game works correctly, the user will not notice that they were sent to an InteractWorld.
+
+In most cases, an InteractWorld exists to take in user input, and check whether the user has pressed
+the buttons with the colors that they were shown previously.
+
+The exception is when the user has pressed all of the colors that they have seen so far (and, in 
+the very beginning of the game, the user has seen no colors, and therefore they have pressed all of
+the colors they have seen so far). In this case, they are sent to a [MovieWorld]
+
+The number of colors that the user needs to click correctly before they are sent to a [MovieWorld]
+is kept track of by means of the field *int winNum*.
+
+When the user has pressed all the colors that they have seen so far (e.g., when winNum < 1), they
+are sent to a [MovieWorld]. The [InteractWorld] passes the [MovieWorld] it's different color lists,
+but it also picks a random number [0,4), which corresponds to a random Color {Red, Cyan, Blue, Green},
+which is added onto the lists that [MovieWorld] has to display.
+
+
+------ Without the user noticing, a [MovieWorld] is created---------
+
+A MovieWorld's only purpose is to display colors to the user. It displays its colors, and then 
+sends the work off to a different World. 
+
+A movie world has two ILoColor arguments. The first one, *colors*, is the list of colors that the 
+MovieWorld has to display before it has finished its job. The second one, *allColors*, is the 
+original list of colors that the InteractWorld sent it.
+
+A MovieWorld also has a *colorCount* argument. This is not entirely necessary, as it is just the 
+length of *colors*, but it would be useful if we wanted to, like the example game, have a certain 
+color list length that is required to "win" (ex, if getting to a list of colors of length 20 is 
+enough to send the user to a winning LastScene), so I decided to keep that in.
+
+Finally, a MovieWorld has a "tick" argument. [InteractWorld] sets this to 0 as a default, and it 
+just alternates every time we make a new [MovieWorld], and we only actually show the user a 
+new color when the tick is odd--this way, we can put some separation between when the user sees
+two subsequent-but-identical colors.
+
+On every odd iteration, the MovieWorld needs to brighten a color, which is does by asking for help
+from the [Utils] class (elaboration below), and then it asks [ColorLists] for help in shortening
+the *colors*, or the list of colors the MovieWorld still needs to display before its job is done.
+
+When the MovieWorld is out of colors to display (when colorCount !> 1), it needs to send the user
+to an [InteractWorld] so they can press the buttons it just displayed.
+
+-------- The user sat through [MovieWorld]'s presentation and an [InteractWorld] is created-----
+
+The InteractWorld will now get [Utils]' help in deciding whether the user has clicked the right 
+button. If the user clicks the wrong button, [InteractWorld] will call on lastScene(String msg) 
+to create the losing screen, and [InteractWorld] will provide the current score by looking at the
+length of the *allColors* argument--the list of colors in InteractWorld that doesn't change 
+through interations.
+
+---------------------------------------------------------------------------------------------------
+
+
+Some additional information:
+
+
+-------- Utils -------
+Utils is our utilities class. It doesn't have any fields, but it knows how to make colors 
+transparent (by keeping the color RGB, but changing the alpha) and how to check whether a Posn
+is within a given posn and a given tolerance (by subtracting the posn values by the tolerance values
+and comparing). 
+
+------- ColorLists -------
+ColorLists.java was submitted for a previous assignment. It's the backbone behind the list of colors
+that our Worlds use. ColorLists can do all so, sorts of fun things. It knows how to append a color
+to the end of itself, how to find its length, and even compare itself to another list of colors.
