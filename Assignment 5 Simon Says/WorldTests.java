@@ -1,4 +1,3 @@
-
 // This file contains tests for the Worlds
 
 import java.awt.Color;
@@ -7,6 +6,7 @@ import javalib.funworld.*;
 import javalib.worldimages.CircleImage;
 import javalib.worldimages.OutlineMode;
 import javalib.worldimages.OverlayImage;
+import javalib.worldimages.Posn;
 import javalib.worldimages.RectangleImage;
 import javalib.worldimages.TextImage;
 import tester.Tester;
@@ -60,6 +60,14 @@ class ExamplesWorlds {
       new MtLoColor(), 0);
   World interact4 = new InteractWorld(new ConsLoColor(Color.GREEN, new MtLoColor()),
       new MtLoColor(), new MtLoColor(), 0);
+  World interact5 = new InteractWorld(new MtLoColor(), new ConsLoColor(Color.RED, new MtLoColor()),
+      new ConsLoColor(Color.RED, new MtLoColor()), 1);
+  World interact6 = new InteractWorld(new MtLoColor(), new ConsLoColor(Color.CYAN, new MtLoColor()),
+      new ConsLoColor(Color.CYAN, new MtLoColor()), 1);
+  World interact7 = new InteractWorld(new MtLoColor(), new ConsLoColor(Color.BLUE, new MtLoColor()),
+      new ConsLoColor(Color.BLUE, new MtLoColor()), 1);
+  World interact8 = new InteractWorld(new MtLoColor(), new ConsLoColor(Color.GREEN, new MtLoColor()),
+      new ConsLoColor(Color.GREEN, new MtLoColor()), 1);
 
   // MovieWorld examples
   World mw0 = new MovieWorld(new ConsLoColor(Color.RED, new MtLoColor()), 1);
@@ -160,9 +168,38 @@ class ExamplesWorlds {
                 .placeImageXY(new CircleImage(30, OutlineMode.SOLID, Color.GREEN), 300, 300));
   }
   
-
-  // Interactive
-  World interact = new InteractWorld(new MtLoColor(), new MtLoColor(), new MtLoColor(), 0);
-
-
+  // Tests onMousePressed(Posn pos) for the world types that implement it
+  boolean testOnMousePressed(Tester t) {
+    return 
+        // Tests IntroWorld.onMousePressed(Posn pos)
+        t.checkExpect(iw0.onMousePressed(new Posn(250, 250)), new InteractWorld(new MtLoColor(), new MtLoColor(), new MtLoColor(), 0))
+        && t.checkExpect(iw0.onMousePressed(new Posn(300, 200)), new InteractWorld(new MtLoColor(), new MtLoColor(), new MtLoColor(), 0))
+        && t.checkExpect(iw0.onMousePressed(new Posn(326, 250)), iw0)
+        
+        // Tests InteractWorld.onMousePressed for successful clicks
+        && t.checkExpect(interact5.onMousePressed(new Posn(200, 200)), new InteractWorld(new ConsLoColor(Color.RED, new MtLoColor()),
+            new MtLoColor(), new ConsLoColor(Color.RED, new MtLoColor()), 0))
+        && t.checkExpect(interact6.onMousePressed(new Posn(300, 200)), new InteractWorld(new ConsLoColor(Color.CYAN, new MtLoColor()),
+            new MtLoColor(), new ConsLoColor(Color.CYAN, new MtLoColor()), 0))
+        && t.checkExpect(interact7.onMousePressed(new Posn(200, 300)), new InteractWorld(new ConsLoColor(Color.BLUE, new MtLoColor()),
+            new MtLoColor(), new ConsLoColor(Color.BLUE, new MtLoColor()), 0))
+        && t.checkExpect(interact8.onMousePressed(new Posn(300, 300)), new InteractWorld(new ConsLoColor(Color.GREEN, new MtLoColor()),
+            new MtLoColor(), new ConsLoColor(Color.GREEN, new MtLoColor()), 0))
+        
+        // Tests InteractWorld.onMousePressed for unsuccessful clicks
+        && t.checkExpect(interact5.onMousePressed(new Posn(300, 300)), interact5.endOfWorld("You lost!" + " Score: " + 0))
+        && t.checkExpect(interact5.onMousePressed(new Posn(0, 0)), interact5);
+  }
+  
+  // Tests InteractWorld.onMouseReleased(Posn pos)
+  boolean testOnMouseReleased(Tester t) {
+    return t.checkExpect(interact1.onMouseReleased(new Posn(200, 200)),
+        new InteractWorld(new MtLoColor(), new MtLoColor(), new MtLoColor(), 0));
+  }
+  
+  // Tests InteractWorld.lastScene
+  boolean testLastScene(Tester t) {
+    return t.checkExpect(interact1.lastScene("Oopsies"),
+        new WorldScene(500, 500).placeImageXY(new TextImage("Oopsies", 50, Color.GRAY), 250, 250));
+  }
 }
