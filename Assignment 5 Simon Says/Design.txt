@@ -25,7 +25,7 @@ The number of colors that the user needs to click correctly before they are sent
 is kept track of by means of the field *int winNum*.
 
 When the user has pressed all the colors that they have seen so far (e.g., when winNum < 1), they
-are sent to a [MovieWorld]. The [InteractWorld] passes the [MovieWorld] it's different color lists,
+are sent to a [MovieWorld]. The [InteractWorld] passes the [MovieWorld] its different color lists,
 but it also picks a random number [0,4), which corresponds to a random Color {Red, Cyan, Blue, Green},
 which is added onto the lists that [MovieWorld] has to display.
 

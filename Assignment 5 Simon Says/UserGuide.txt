@@ -15,7 +15,7 @@ Then, set "ExamplesGame" as your run arguments.
 Click run, and a window should pop up with the game!    
 
 Watch the color sequence, and use your mouse and left-click button to repeat each sequence after 
-it's shown to you
+it's shown to you.
 
 If you get the sequence correct, you will be shown the exact same sequence again except, this time, 
 the sequence will be one color longer. Pay attention!
