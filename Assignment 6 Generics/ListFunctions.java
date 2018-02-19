@@ -81,29 +81,30 @@ class ComposeFunctions<T, U, V> implements IFunc2<IFunc<T, U>, IFunc<U, V>, IFun
 
 // To represent an generic list
 interface IList<T> {
-  // Fold this list of objects onto the base using the function
-  <U> U fold(IFunc2<T, U, U> fun, U base);
+  // folds this list of objects onto the base using the function
+  <U> U fold1(IFunc2<T, U, U> fun, U base);
 }
 
-// To represent a non-empty generic list
-class Cons<T> implements IList<T> {
+// To represent a non-MtList generic list
+class ConsList<T> implements IList<T> {
   T first;
   IList<T> rest;
 
-  Cons(T first, IList<T> rest) {
+  ConsList(T first, IList<T> rest) {
     this.first = first;
     this.rest = rest;
   }
 
-  // Fold this non-empty list of objects onto the base using the function
-  public <U> U fold(IFunc2<T, U, U> fun, U base) {
-    return this.rest.fold(fun, fun.apply(this.first, base));
+  // folds this non-empty list of objects onto the base using the function
+  public <U> U fold1(IFunc2<T, U, U> fun, U base) {
+    return this.rest.fold1(fun, fun.apply(this.first, base));
   }
 }
 
-// To represent an empty generic list
-class Empty<T> implements IList<T> {
-  public <U> U fold(IFunc2<T, U, U> fun, U base) {
+// To represent an MtList generic list
+class MtList<T> implements IList<T> {
+  // folds this empty list of objects onto the base using the function
+  public <U> U fold1(IFunc2<T, U, U> fun, U base) {
     return base;
   }
 }
@@ -117,18 +118,19 @@ class ExamplesFunc {
   IFunc<Double, Double> eq1 = new FunctionComposition<Double, Double, Double>(sin,
       new FunctionComposition<Double, Double, Double>(plus1, sqr));
 
-  IList<IFunc<Double, Double>> eq1List = new Cons<IFunc<Double, Double>>(sin,
-      new Cons<IFunc<Double, Double>>(plus1,
-          new Cons<IFunc<Double, Double>>(sqr, new Empty<IFunc<Double, Double>>())));
+  IList<IFunc<Double, Double>> eq1List = new ConsList<IFunc<Double, Double>>(sin,
+      new ConsList<IFunc<Double, Double>>(plus1,
+          new ConsList<IFunc<Double, Double>>(sqr, new MtList<IFunc<Double, Double>>())));
 
-  IFunc2<IFunc<Double, Double>, IFunc<Double, Double>, IFunc<Double, Double>> compose = new ComposeFunctions<Double, Double, Double>();
+  IFunc2<IFunc<Double, Double>, IFunc<Double, Double>, IFunc<Double, Double>> compose = 
+      new ComposeFunctions<Double, Double, Double>();
 
-  // IFunc<Double, Double> fold1 = eq1List.fold(, idDouble);
+  // IFunc<Double, Double> fold11 = eq1List.fold1(, idDouble);
 
   public boolean testFun(Tester t) {
     return t.checkExpect(sqr.apply(3.0), 9.0) && t.checkExpect(sin.apply(Math.PI / 2), 1.0)
         && t.checkExpect(id.apply("Echo"), "Echo") && t.checkExpect(plus1.apply(1.0), 2.0)
         && t.checkExpect(eq1.apply(Math.PI / 2), 4.0)
-        && t.checkExpect(eq1List.fold(compose, idDouble), eq1);
+        && t.checkExpect(eq1List.fold1(compose, idDouble), eq1);
   }
 }
