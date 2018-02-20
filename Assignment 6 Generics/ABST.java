@@ -167,11 +167,11 @@ class Node<T> extends ABST<T> {
   // Insert an item onto this node
   ABST<T> insert(T item) {
     if (order.compare(this.data, item) < 0) {
-      return this.left.insert(item);
+      return new Node<T>(this.data, this.left.insert(item), this.right, this.order); 
     }
 
     else {
-      return this.right.insert(item);
+      return new Node<T>(this.data, this.left, this.right.insert(item), this.order); 
     }
   }
 
