@@ -1,9 +1,9 @@
 # Class-Based-Fundamentals-Assignments-in-Java
 *For collaboration between my partners and I on the second-semester of the introductory computer science sequence at Northeastern University.*
 
-##This is the coursework for a Fall 2018 Computer Science course.
+## This is the coursework for a Fall 2018 Computer Science course.
 
-####I've purposefully kept specific names out of the title and description to discourage plagiarism.
+#### I've purposefully kept specific names out of the title and description to discourage plagiarism.
 
 The official assignment names are as follows:
 
