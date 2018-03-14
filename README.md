@@ -3,7 +3,7 @@
 
 ## This is the coursework for a Fall 2018 Computer Science course.
 
-#### I've purposefully kept specific names out of the title and description to discourage plagiarism.
+#### I've purposefully not mentioned the official name of the course in the title and description to discourage plagiarism.
 
 The official assignment names are as follows:
 
