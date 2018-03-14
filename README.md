@@ -1,4 +1,4 @@
-# Class-Based-Fundamentals-Assignments-in-Java
+# Class Based Fundamentals Assignments
 *For collaboration between my partners and I on the second-semester of the introductory computer science sequence at Northeastern University.*
 
 ## This is the coursework for a Fall 2018 Computer Science course.
