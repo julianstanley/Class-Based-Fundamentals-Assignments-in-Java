@@ -1,0 +1,136 @@
+File Guides:
+
+ALightEmAll.java 
+	Brief Description: An abstract To represent a overhead-view of the game
+	Children classes:
+		- LightEmAllPart1.java
+				- Wires are fixed and simple
+		- LightEmAllPart2.java
+			- fractalConnections() does the heavy lifting for connecting game pieces
+		- LightEmAll.java // (Part 3)
+			- initMST() generates a random graph with Kruskal's Algorithm
+		
+	Fields:
+		Define the:
+			- Physical components of the game window
+			- GamePieces that exist in the game
+			- Location and capability of the powerstation
+		
+			- Static end-game components
+		
+ 	Methods:
+ 		Give the ability to:
+ 			- Physically display the world
+ 				- makeScene() draws the world, and should be broken down into helper
+ 				methods as the drawing becomes more complex
+ 				
+ 			- Properly initialize data
+ 				- generateBoard() initially makes game pieces and puts them into a nested list
+ 				- generateWires() is an abstract class that describes how the game generates 
+ 					its wires
+ 				- generateNodes() collapses the board nested list 
+ 				- generateNeighbors() properly connects the game pieces to each other
+ 				- updatePower() calls on the powerstation to power the rest of the game pieces
+ 				- shufflePieces() loops through each game piece and shuffles its wires
+ 				- placeEdges() uses the game's MST to create connections
+ 				- initNeighbors() helps with initialization by connecting all nodes
+ 				- generatePossibleEdges() works with initNeighbors() to make all possible edges
+ 				
+ 			- Update the world
+ 				- onTick() constantly checks for the win condition 
+ 				- restart() resets the whole world with new values
+ 				
+ 			- End the game
+ 				- gameWon() checks whether the game has been won. It's called by onTick()
+ 				- endOfWorld() changes the activation state and endText (used by makeScene())
+ 				
+ 			- Deal with user input
+ 				- onMouseClicked() checks for a left button press, right button press,
+ 				  and whether any mouse click occurred at all. It deals with things differently
+ 				  depending on the active state of the world, so it should be broken
+ 				  down into helpers in the future
+ 				- onKeyEvent() checks for the "r" key to restart the game
+ 				- isOnMap() makes sure that user input is within the game
+
+GamePiece.java
+	Brief Description: To represent a single gamepiece, including the neighbors with which 
+	that gamepiece can interact
+	
+	Fields:
+		Define the:
+			- Location of this piece
+			- The wires of this piece
+			- Whether this piece is the powerstation
+			- The activation level of this piece
+			- The neighbors that this piece has
+			
+	Methods:
+		Give the ability to:
+		 	- Draw this GamePiece
+		 		- drawSelf() uses physical properties to draw one game piece
+		 	- Alter this piece's properties
+		 		- addNeighbor() adds a game piece to this neighbor list
+		 		- removeAllNeighbors() resets the neighbors list
+		 		- removeAllValue() resets the activation level
+		 		- rotateSelf() rotates wire connections
+		 		- updateValue() changes activation level
+		 		- shuffle() rotates this gamepiece 90, 180, 270, or 360 degrees
+		 		
+		 	- Ask neighbors to alter their physical properties
+		 		- updateValue() also updates the value of all neighbors,
+		 		generating a flood-like reaction across all connected pieces
+		 	
+			
+
+Examples.java
+	Brief Description: To hold tests and initialize the game
+	
+	Initialization statements:
+		init()
+			- Main initialization, 10-by-10 grid
+		initTest()
+			- Uses helper constructor, 5x5, no tiles, random seed 100
+		initList()
+			- Initializes a simple list for heapsort testing
+		
+	
+	Tests: Below is a description of this project's methods and their corresponding tests
+	- Overall Game --> testBigBang()
+	
+	- LightEmAll
+		generateBoard() --> testGenerateBoard()
+		generateNodes() --> testGenerateNodes()
+		generateNeighbors() --> testNeighbors()
+		makeScene() --> testMakeScene()
+		onTick() --> testOnTick()
+		onMouseClicked() --> testOnClick()
+		onKeyEvent(String) --> testOnPress()
+		restart() --> testRestart()
+		updatePower() --> testUpdatePower()
+		shufflePieces() --> testShuffle()
+		gameWon() --> testWon()
+		endOfWorld() --> testEnd()
+		 
+	- GamePiece
+		GamePiece.drawSelf(WorldScene) --> testGamePieceDraw()
+		GamePiece.addNeighbor(GamePiece) --> testAddNeighbor()
+		GamePiece.removeAllNeighbors() --> testRemoveAllNeighbors()
+		GamePiece.removeAllVaue() --> testRemoveAllValue()
+		GamePiece.rotateSelf() --> testRotate()
+		GamePiece.updateValue() --> testUpdateValue()
+		GamePiece.shuffle() -> testShufflePiece()
+		GamePiece.connectedTo(GamePiece) --> testConnected()
+		
+	- Utils
+		Utils.heapsort(ArrayList<T>) --> testHeapsort()
+		
+	- Edge
+	
+	.. et al.
+
+
+Edge.java
+	Brief Description: To connect one GamePiece to another
+
+Utils.java
+	Brief Description: To hold utility methods, mostly dealing with ArrayLists

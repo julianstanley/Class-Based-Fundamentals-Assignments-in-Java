@@ -1,0 +1,34 @@
+ _      _       _     _     ______           _            _ _ 
+| |    (_)     | |   | |   |  ____|         ( )     /\   | | |
+| |     _  __ _| |__ | |_  | |__   _ __ ___ |/     /  \  | | |
+| |    | |/ _` | '_ \| __| |  __| | '_ ` _ \      / /\ \ | | |
+| |____| | (_| | | | | |_  | |____| | | | | |    / ____ \| | |
+|______|_|\__, |_| |_|\__| |______|_| |_| |_|   /_/    \_\_|_|
+           __/ |                                              
+          |___/                                               
+
+Welcome to Light Em' All!
+
+Keys:
+	Left Mouse Click: Rotate a GamePiece
+	Right Mouse Click: Auto-solve this game
+	
+How to win:
+	Connect the powerstation (star) to all game pieces by rotating game pieces so that their wires
+	align.
+	
+	
+	Example win condition:
+	
+	|------------------|                 
+	|------------------|                    
+	|------------------|                    
+	|------------------|                    
+	|-------Star-------|
+	|------------------|                    
+	|------------------|                     
+	|------------------|                     
+	
+To restart game:
+	After winning, click anywhere to restart the game.
+	At any time, pressing the "r" key will restart the game
