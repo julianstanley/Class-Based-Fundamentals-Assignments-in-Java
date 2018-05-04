@@ -22,3 +22,9 @@ The official assignment names are as follows:
 * Assignment 7: Visitors and Cyclic data
 
 * Assignment 8: Doubly-linked lists
+
+* Assignment 9: Minesweeper
+
+* Assignment 10: Light Em' All
+
+The final assignment gives a good overview of the concepts learned in this class. It includes: (1) a working implementation of generic-type heapsort, (2) abstracted functionality (3) use of various loops, both in the core code and testing
